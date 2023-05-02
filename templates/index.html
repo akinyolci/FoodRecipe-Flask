@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block header %}{% endblock %}
+<br>
+{% block content %}
+
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center">
+  <img src="{{ url_for('static', filename='img/banner.jpeg') }}" alt="Banner Image" height="400" width="1100">
+</div>
+
+<div class="container border my-5" style="width: 30%; background-color: #c9e2b3 ">
+  <h4 >Search Whatever You Want!</h4>
+  <br>
+  <form class="form-inline" action="/search" method="GET">
+    <div class="form-group mx-sm-3 mb-2">
+      <input type="search" name="q" class="form-control" placeholder="Search recipes">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Search</button>
+  </form>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="row">
+        {% for recipe in recipes %}
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <img class="card-img-top" src="{{ url_for('static', filename='img/' + recipe.image_url) }}" alt="{{ recipe.name }}" width="200" height="150">
+            <div style="text-align: center" class="card-body">
+              <h5 class="card-title">{{ recipe.name }}</h5>
+              <p class="card-text">{{ recipe.description }}</p>
+              <a href="/recipes/{{ recipe.id }}" class="btn btn-primary">View Recipe</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Ingredients</h5>
+          <hr>
+          <ul>
+            {% for ingredient in ingredients %}
+            <li>{{ ingredient.name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+<br />
+<br />
+{% block footer %}{% endblock %}
