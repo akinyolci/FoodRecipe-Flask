@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+    {% block header %}{% endblock %}
+{% block content %}
+    <h1>Ingredients</h1>
+  <ul>
+    {% for ingredient in ingredients %}
+      <div>
+          <h1>{{ ingredient.name }}</h1>
+          <br>
+    <img src="{{ url_for('static', filename='img/' + ingredient.image_url) }}" alt="{{ ingredient.name }}" width="300" height="300">
+          <br>
+              <ul>
+                  {% for recipe in ingredient.recipes %}
+                  <li><a href="/recipes/{{ recipe.id }}"> {{ recipe.name }}</a></li>
+
+                  {% endfor %}
+              </ul>
+      </div>
+      <hr>
+    {% endfor %}
+  </ul>
+{% endblock %}

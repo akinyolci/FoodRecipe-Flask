@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Liked Recipes</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for recipe in liked_recipes %}
+          <tr>
+            <td>{{ recipe.recipe.name }}</td>
+            <td>
+              <a href="{{ url_for('recipe_detail', id=recipe.recipe_id) }}" class="btn btn-primary btn-sm mr-2">View</a>
+            </td>
+            <td>
+              <form method="POST" action="{{ url_for('unlike_recipe', recipe_id=recipe.id) }}">
+  <button class="btn btn-danger btn-sm" type="submit">Unlike</button>
+</form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

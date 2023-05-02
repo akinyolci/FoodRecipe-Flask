@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block header %}{% endblock %}
+
+{% block content %}
+<h4>Results for: <em>{{ q }}</em>.</h4>
+
+<div class="row text-center">
+  {% for recipe in recipes %}
+
+  <div class="col l12 m12 s12" style="text-align:center">
+    <div class="card" style="margin-left: 20px; margin-right:40px">
+      <div class="card-body" style="margin-left: 20px; margin-right:40px">
+        <div class="card-title" style="text-align: center"></strong>
+
+          <!--referred to this for centering image but didn't work, as I didn't target parent or child elements. Image is therefore a bit left sided. https://css-tricks.com/snippets/css/absolute-center-vertical-horizontal-an-image/-->
+
+          <img src="{{ url_for('static', filename='img/' + recipe.image_url) }}" alt="image" style="width: 300px; height: 200px">
+          <a href="recipes/{{ recipe.id}}">{{ recipe.name }}</a>
+          <!--referred to this for centerng button https://www.sitepoint.com/community/t/center-submit-button/6038-->
+
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+{% endblock %}

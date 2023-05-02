@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center">Recipe Detail</h1>
+    <br>
+    <div style="text-align: center"><img src="{{ url_for('static', filename='img/' + recipe.image_url) }}" alt="{{ recipe.name }}" width="600" height="400"></div>
+    <h2 style="text-align: center">{{ recipe.name }}</h2>
+<hr>
+    {% if current_user.is_authenticated %}
+<div style="text-align: center" >
+  <form method="POST" action="{{ url_for('like_recipe', recipe_id=recipe.id, current_user=current_user) }}" class="mb-3">
+    <button type="submit" class="btn btn-primary">Like</button>
+  </form>
+    </div>
+{% endif %}
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Recipe</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for step in recipe_ins %}
+                <tr>
+                    <td>{{ step }}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <!-- create a slider for the ingredients -->
+<h4 style="text-align: center"><b>Ingredients</b></h4>
+    <div class="slider">
+        {% for ingredient in ingredients %}
+        <div class="col-md-4">
+            <img src="{{ url_for('static', filename='img/' + ingredient.image_url) }}" alt="{{ ingredient.name }}" width="150" height="150">
+            <h3 style="text-align: center">{{ ingredient.name }} </h3>
+        </div>
+
+
+
+        {% endfor %}
+    </div>
+{% endblock %}
